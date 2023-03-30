@@ -1,2 +1,2 @@
-# self-employment-data
-Web app which aggregates data about self-employment
+# AI Recruiter
+Web app with AI generated IT interview questions
