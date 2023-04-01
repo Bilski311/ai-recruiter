@@ -2,7 +2,11 @@
 module.exports = {
   content: ["src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    fontFamily: {
+      sans: ["Bebas Neue"],
+      serif: ["Bebas Neue"],
+      mono: ["Bebas Neue"],
+    },
   },
   plugins: [],
 };
