@@ -1,7 +1,9 @@
 function Header() {
   return (
-    <header className="p-5 bg-blue-500">
-      <p>I am a header</p>
+    <header className="p-5 flex items-center justify-center bg-gradient-to-r from-indigo-600 via-pink-500 to-purple-500">
+      <p className="font-roboto text-white font-semibold text-3xl uppercase tracking-wider animate-fade-in">
+        Futuristic Job Market
+      </p>
     </header>
   );
 }
