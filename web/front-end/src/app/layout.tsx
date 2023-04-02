@@ -1,6 +1,7 @@
 import Header from "@/app/Header";
 import "../styles/globals.css";
 import "../styles/animations.css";
+import Footer from "@/app/Footer";
 
 export const metadata = {
   title: "My next.js app",
@@ -13,9 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body>
+      <body className="flex flex-col min-h-screen">
         <Header />
-        {children}
+        <div className="flex-1">{children}</div>
+        <Footer />
       </body>
     </html>
   );

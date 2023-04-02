@@ -45,18 +45,6 @@ function Home() {
           </div>
         </section>
       </main>
-
-      <footer className="bg-gray-800 py-12 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-white font-semibold text-xl mb-2">
-            Futuristic Job Market
-          </p>
-          <p className="text-gray-400">
-            &copy; {new Date().getFullYear()} Futuristic Job Market. All rights
-            reserved.
-          </p>
-        </div>
-      </footer>
     </>
   );
 }
