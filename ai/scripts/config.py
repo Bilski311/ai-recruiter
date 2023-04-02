@@ -13,7 +13,8 @@ output_types = {
     'SUBTOPIC': {
         'system_template': 'You are helping to generate a list of subtopics person applying for a job should know for the given topic: {subject}.',
         'human_template': 'Generate a list of 10 subtopics in JSON format. Write it out only in JSON format(no other text). The JSON should have the format [\n\t{{"subtopic": "Subtopic 1"}},\n\t {{"subtopic": "Subtopic 2"}}].',
-        'collection': 'subtopics'
+        'collection': 'topics',
+        
     },
     'QUESTION': {
         'system_template': 'You are helping to generate dataset of questions for IT recruitement process related to {subject}.',
