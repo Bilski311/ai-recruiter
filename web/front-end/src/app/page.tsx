@@ -6,7 +6,7 @@ import { faCss3Alt } from "@fortawesome/free-brands-svg-icons/faCss3Alt";
 function Home() {
   return (
     <>
-      <main className="bg-gray-100">
+      <main>
         <section className="py-20 px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-bold text-gray-800 mb-6">
@@ -22,7 +22,7 @@ function Home() {
           </div>
         </section>
 
-        <section className="py-20 px-6">
+        <section className=" px-6">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card
               title={"HTML"}
