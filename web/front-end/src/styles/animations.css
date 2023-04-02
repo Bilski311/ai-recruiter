@@ -17,10 +17,6 @@
     animation: pulse 1s infinite;
 }
 
-.constant-pulse {
-    animation: pulse 1s infinite;
-}
-
 @keyframes fade-in {
     from {
         opacity: 0;
@@ -36,4 +32,21 @@
     animation-name: fade-in;
     animation-duration: 1.5s;
     animation-fill-mode: forwards;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 5s ease infinite;
 }
