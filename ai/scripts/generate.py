@@ -6,7 +6,7 @@ from mongo_utils import save_to_mongo
 from config import output_types
 
 
-def generate(output_type, subject_type, save_result):
+def generate(output_type, subject_type, save_result, confirm_needed):
     output_type_config = output_types[output_type]
     system_template = output_type_config['system_template']
     human_template = output_type_config['human_template']
@@ -16,6 +16,11 @@ def generate(output_type, subject_type, save_result):
     print(output)
 
     if save_result:
+        if confirm_needed:
+            print('Save the result?[Y/N]')
+            answer = input('Save the result?[Y/N]')
+            if answer == 'N':
+                return
         collection = output_type_config['collection']
         save_to_mongo(json.loads(output), collection)
 
@@ -27,6 +32,8 @@ if __name__ == "__main__":
     parser.add_argument("subject_type", help="Subject type (e.g., JavaScript)")
     parser.add_argument("--save", action="store_true",
                         help="Save the result to MongoDB")
+    parser.add_argument("--confirm-needed", action="store_true",
+                        help="Save the result to MongoDB")
 
     args = parser.parse_args()
 
@@ -37,4 +44,4 @@ if __name__ == "__main__":
     else:
         output_type = args.output_type.upper()
         subject_type = args.subject_type
-        generate(output_type, subject_type, args.save)
+        generate(output_type, subject_type, args.save, args.confirm_needed)
