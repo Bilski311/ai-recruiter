@@ -6,24 +6,26 @@ import { faCss3Alt } from "@fortawesome/free-brands-svg-icons/faCss3Alt";
 function Home() {
   return (
     <>
-      <main>
-        <section className="py-20 px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold text-gray-800 mb-6">
-              Welcome to the Future of Job Searching
-            </h1>
-            <p className="text-xl text-gray-600 mb-10">
-              Find your dream job with our advanced AI-powered job matching
-              system.
-            </p>
-            <button className="bg-gradient-to-r from-indigo-600 to-purple-500 text-white font-semibold py-3 px-6 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 pulse">
-              Get Started
-            </button>
-          </div>
-        </section>
+      <header className="bg-gray-100">
+        <div className="max-w-4xl mx-auto py-8 px-6 text-center">
+          <h1 className="text-5xl font-bold text-gray-800 mb-6">
+            Welcome to Flashcards for Job Interviews
+          </h1>
+          <p className="text-xl text-gray-600 mb-10">
+            We provide flashcard sets for learning programming concepts,
+            algorithms, data structures and more, to help you ace your next job
+            interview.
+          </p>
+        </div>
+      </header>
 
-        <section className=" px-6">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="px-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-6">
+            Flashcard Sets
+          </h2>
+          <hr className="border-gray-300 mb-8" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card
               title={"HTML"}
               description={
@@ -49,8 +51,8 @@ function Home() {
               iconClassName={"text-blue-600"}
             />
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
     </>
   );
 }
