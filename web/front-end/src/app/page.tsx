@@ -5,7 +5,7 @@ function Home() {
   return (
     <>
       <LandingPageHeader />
-      <Sets />
+      <Sets className={"py-10"} />
     </>
   );
 }

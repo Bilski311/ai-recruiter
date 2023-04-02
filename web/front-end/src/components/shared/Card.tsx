@@ -7,11 +7,14 @@ interface Props {
   description: string;
   icon: IconDefinition;
   iconClassName: string;
+  className?: string;
 }
 
-function Card({ title, description, icon, iconClassName }: Props) {
+function Card({ title, description, icon, iconClassName, className }: Props) {
   return (
-    <div className="bg-white rounded-lg shadow-md text-center p-8 hover:cursor-pointer hover:shadow-lg hover:bg-gray-800 hover:text-white">
+    <div
+      className={`bg-white rounded-lg shadow-md text-center p-8 hover:cursor-pointer hover:shadow-lg hover:bg-gray-800 hover:text-white ${className}`}
+    >
       <div className="flex justify-center items-center mb-4">
         <FontAwesomeIcon
           icon={icon}
