@@ -1,14 +1,15 @@
-from .question import question_schema
+from .flashcard import flashcard_schema
 
 subtopic_schema = {
     'type': 'object',
     'properties': {
         'name': {'type': 'string'},
-        'questions': {
+        'flashcards': {
             'type': 'array',
-            'items': question_schema,
+            'items': flashcard_schema,
         },
+        'topic_id': {'type': 'string'},
     },
     'additionalProperties': False,
-    'required': ['name'],
+    'required': ['name', 'topic_id'],
 }

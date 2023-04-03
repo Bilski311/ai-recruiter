@@ -1,4 +1,4 @@
-question_schema = {
+flashcard_schema = {
     'type': 'object',
     'properties': {
         'question': {'type': 'string'},

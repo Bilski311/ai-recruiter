@@ -4,9 +4,8 @@ topic_schema = {
     'type': 'object',
     'properties': {
         'name': {'type': 'string', },
-        'subtopics': {
-            'type': 'array',
-            'items': subtopic_schema,
+        'subtopic_ids': {
+            'type': 'array'
         },
     },
     'required': ['name'],
