@@ -1,19 +1,14 @@
+from .question import question_schema
+
 subtopic_schema = {
-    'type': 'array',
-    'items': {
+    'type': 'object',
+    'properties': {
         'name': {'type': 'string'},
         'questions': {
             'type': 'array',
-            'items': {
-                'type': 'object',
-                'properties': {
-                    'question': {'type': 'string'},
-                    'answer': {'type': 'string'},
-                },
-                'required': ['question', 'answer'],
-                'additionalProperties': False,
-            }
+            'items': question_schema,
         },
-        'required': ['name'],
     },
+    'additionalProperties': False,
+    'required': ['name'],
 }
