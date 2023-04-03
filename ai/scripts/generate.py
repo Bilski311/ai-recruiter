@@ -5,15 +5,22 @@ from chat_utils import generate_chat_output
 from backend_client import save_topics
 from config import output_types
 from arguments import Arguments
+from generators.topic_generator import TopicGenerator
+from generators.content_generator import ContentGenerator
 
 
 def generate(output_type, subject_type, number, save_result, confirm_needed):
-    output_type_config = output_types[output_type]
-    system_template = output_type_config['system_template']
-    human_template = output_type_config['human_template']
+    if output_type == 'TOPIC':
+        topic_generator = TopicGenerator(ContentGenerator())
+        output = topic_generator.generateTopicsForJob(subject_type, number)
+        print(output)
+    else:
+        output_type_config = output_types[output_type]
+        system_template = output_type_config['system_template']
+        human_template = output_type_config['human_template']
 
-    output = generate_chat_output(system_template, human_template, subject=subject_type, number=number)
-    print(output)
+        output = generate_chat_output(system_template, human_template, subject=subject_type, number=number)
+        print(output)
 
     if save_result:
         if confirm_needed:
