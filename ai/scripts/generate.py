@@ -2,7 +2,7 @@ import json
 import argparse
 
 from chat_utils import generate_chat_output
-from mongo_utils import save_to_mongo
+from backend_client import save_topics
 from config import output_types
 
 
@@ -17,12 +17,11 @@ def generate(output_type, subject_type, save_result, confirm_needed):
 
     if save_result:
         if confirm_needed:
-            print('Save the result?[Y/N]')
             answer = input('Save the result?[Y/N]')
             if answer == 'N':
                 return
         collection = output_type_config['collection']
-        save_to_mongo(json.loads(output), collection)
+        save_topics(json.loads(output))
 
 
 if __name__ == "__main__":
