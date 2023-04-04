@@ -1,10 +1,13 @@
 import argparse
 
+
 class Arguments:
     def __init__(self):
         parser = argparse.ArgumentParser()
-        parser.add_argument("output_type", help="Output type (e.g., TOPIC, SUBTOPIC, QUESTION)")
-        parser.add_argument("subject_type", help="Subject type (e.g., JavaScript)")
+        parser.add_argument(
+            "output_type", help="Output type (e.g., TOPIC, SUBTOPIC, QUESTION)")
+        parser.add_argument(
+            "subject_type", help="Subject type (e.g., JavaScript)")
         parser.add_argument("number", help="Number of outputs")
         parser.add_argument("--save", action="store_true",
                             help="Save the result to MongoDB")

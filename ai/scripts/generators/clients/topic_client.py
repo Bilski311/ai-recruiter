@@ -1,4 +1,5 @@
 import requests
+from requests.exceptions import HTTPError
 from .base_client import BaseClient
 
 
@@ -7,20 +8,19 @@ class TopicClient(BaseClient):
         super().__init__(endpoint="topic")
 
     def get_by_name(self, name):
-        url = self.url + '/name/' + name
-        response = requests.get(url)
-        if response.status_code == 200:
-            return response.json()
-        else:
-            return None
+        url = f"{self.url}/name/{name}"
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+        except HTTPError as e:
+            e.response = response
+            raise e
+
+        return response.json()
 
     def saveAll(self, topics):
         for topic in topics:
-            requests.post(self.url, json=topic)
+            return requests.post(self.url, json=topic)
 
     def save(self, topic):
-        requests.post(self.url, json=topic)
-
-    def getByName(self, name):
-        response = requests.get(self.url, params={"name": name})
-        return response.json()
+        return requests.post(self.url, json=topic)

@@ -20,7 +20,6 @@ class ContentGenerator:
 
         output = self._generate_chat_output(
             system_template, human_template, **kwargs)
-        print(output)
         return json.loads(output)
 
     def _generate_chat_output(self, system_template, human_template, **kwargs):

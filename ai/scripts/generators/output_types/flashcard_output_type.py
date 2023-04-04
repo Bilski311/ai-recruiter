@@ -1,7 +1,7 @@
 from .output_type import OutputType
 
 
-class QuestionOutputType(OutputType):
+class FlashcardOutputType(OutputType):
     def __init__(self):
         super().__init__(
             system_template='You are helping to generate dataset of questions for IT recruitement process related to {subtopic}.',

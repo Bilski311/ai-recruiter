@@ -1,6 +1,4 @@
-from generators.topic_generator import TopicGenerator
-from generators.subtopic_generator import SubtopicGenerator
-from generators.question_generator import QuestionGenerator
+from generators import TopicGenerator, SubtopicGenerator, FlashcardGenerator
 
 
 def get_generator(output_type):
@@ -8,8 +6,8 @@ def get_generator(output_type):
         return TopicGenerator()
     elif output_type == 'SUBTOPIC':
         return SubtopicGenerator()
-    elif output_type == 'QUESTION':
-        return QuestionGenerator()
+    elif output_type == 'FLASHCARD':
+        return FlashcardGenerator()
     else:
         return None
 
@@ -29,10 +27,10 @@ def generate(output_type, subject_type, number):
 
 
 def main():
-    available_types = ['TOPIC', 'SUBTOPIC', 'QUESTION']
+    available_types = ['TOPIC', 'SUBTOPIC', 'FLASHCARD']
 
     while True:
-        print("\nAvailable types: ")
+        print("\nCreate a: ")
         for key in available_types:
             print(key)
 

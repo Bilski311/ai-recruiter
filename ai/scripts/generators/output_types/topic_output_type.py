@@ -1,5 +1,6 @@
 from .output_type import OutputType
 
+
 class TopicOutputType(OutputType):
     def __init__(self):
         super().__init__(
