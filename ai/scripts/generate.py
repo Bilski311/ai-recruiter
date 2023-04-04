@@ -1,44 +1,51 @@
-import json
-import argparse
-
-from chat_utils import generate_chat_output
-from backend_client import save_topics
-from config import output_types
-from arguments import Arguments
 from generators.topic_generator import TopicGenerator
-from generators.content_generator import ContentGenerator
+from generators.subtopic_generator import SubtopicGenerator
+from generators.question_generator import QuestionGenerator
 
 
-def generate(output_type, subject_type, number, save_result, confirm_needed):
+def get_generator(output_type):
     if output_type == 'TOPIC':
-        topic_generator = TopicGenerator(ContentGenerator())
-        output = topic_generator.generateTopicsForJob(subject_type, number)
+        return TopicGenerator()
+    elif output_type == 'SUBTOPIC':
+        return SubtopicGenerator()
+    elif output_type == 'QUESTION':
+        return QuestionGenerator()
+    else:
+        return None
+
+
+def generate(output_type, subject_type, number):
+    generator = get_generator(output_type)
+    output = None
+    if generator:
+        output = generator.generate(subject_type, number)
         print(output)
     else:
-        output_type_config = output_types[output_type]
-        system_template = output_type_config['system_template']
-        human_template = output_type_config['human_template']
+        print(f"Invalid output type: {output_type}")
+        return
 
-        output = generate_chat_output(system_template, human_template, subject=subject_type, number=number)
-        print(output)
+    if input("Save the result to MongoDB? (Y/N) ").upper() == 'Y':
+        generator.save_all(output)
 
-    if save_result:
-        if confirm_needed:
-            answer = input('Save the result?[Y/N]')
-            if answer == 'N':
-                return
-        save_topics(json.loads(output))
+
+def main():
+    available_types = ['TOPIC', 'SUBTOPIC', 'QUESTION']
+
+    while True:
+        print("\nAvailable types: ")
+        for key in available_types:
+            print(key)
+
+        output_type = input(
+            "\nEnter the output type or 'EXIT' to quit: ").upper()
+        if output_type == 'EXIT':
+            break
+
+        subject_type = input("Enter the subject type: ")
+        number = int(input("Enter the number of outputs: "))
+
+        generate(output_type, subject_type, number)
 
 
 if __name__ == "__main__":
-    args = Arguments()
-
-    if args.output_type not in output_types.keys():
-        print("Available types: ")
-        for key in output_types.keys():
-            print(key)
-    else:
-        output_type = args.output_type
-        subject_type = args.subject_type
-        number = args.number
-        generate(output_type, subject_type, number, args.save, args.confirm_needed)
+    main()

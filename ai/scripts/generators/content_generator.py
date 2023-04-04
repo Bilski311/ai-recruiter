@@ -1,6 +1,4 @@
 import json
-from config import output_types
-from chat_utils import generate_chat_output
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import (
     ChatPromptTemplate,
@@ -10,15 +8,19 @@ from langchain.prompts import (
 
 from config import CHAT_TEMPERATURE
 
+
 class ContentGenerator:
-    def __init__(self):    
+    def __init__(self, output_type):
+        self.output_type = output_type
         self.chat = ChatOpenAI(temperature=CHAT_TEMPERATURE)
-    def generate(self, output_type, **kwargs):
-        output_type_config = output_types[output_type]
-        system_template = output_type_config['system_template']
-        human_template = output_type_config['human_template']
-        
-        output = self._generate_chat_output(system_template, human_template, **kwargs)
+
+    def generate(self, **kwargs):
+        system_template = self.output_type.system_template
+        human_template = self.output_type.human_template
+
+        output = self._generate_chat_output(
+            system_template, human_template, **kwargs)
+        print(output)
         return json.loads(output)
 
     def _generate_chat_output(self, system_template, human_template, **kwargs):

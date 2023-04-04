@@ -15,6 +15,14 @@ db = client['ai_recruiter']
 topics = db['topics']
 subtopics = db['subtopics']
 
+@app.route('/topic/name/<string:topic_name>', methods=['GET'])
+def get_topic_by_name(topic_name):
+    topic = topics.find_one({'name': topic_name})
+    if topic:
+        topic['_id'] = str(topic['_id'])
+        return jsonify(topic)
+    else:
+        return jsonify({'error': f'Topic with name {topic_name} does not exist'}), 404
 
 @app.route('/topic', methods=['GET'])
 def get_topics():
