@@ -9,7 +9,7 @@ from langchain.prompts import (
 from config import CHAT_TEMPERATURE
 
 
-class ContentGenerator:
+class ChatOutputGenerator:
     def __init__(self, output_type):
         self.output_type = output_type
         self.chat = ChatOpenAI(temperature=CHAT_TEMPERATURE)

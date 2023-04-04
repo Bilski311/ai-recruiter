@@ -18,9 +18,9 @@ class TopicClient(BaseClient):
 
         return response.json()
 
-    def saveAll(self, topics):
+    def save_all(self, topics):
         for topic in topics:
-            return requests.post(self.url, json=topic)
+            requests.post(self.url, json=topic)
 
     def save(self, topic):
         return requests.post(self.url, json=topic)

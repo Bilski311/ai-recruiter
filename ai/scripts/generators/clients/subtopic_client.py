@@ -1,5 +1,5 @@
 import requests
-from requests.exceptions import RequestException, HTTPError
+from requests.exceptions import HTTPError
 from .base_client import BaseClient
 
 
