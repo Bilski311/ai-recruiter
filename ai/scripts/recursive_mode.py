@@ -33,4 +33,4 @@ class RecursiveMode:
                 print('GENERATING FLASHCARDS FOR SUBTOPIC: ' +
                       subtopic['name'])
                 flashcards = flashcard_service.generate_and_send(
-                    subtopic, num_flashcards, ask_before_saving=False)
+                    subtopic['name'], num_flashcards, ask_before_saving=False)
