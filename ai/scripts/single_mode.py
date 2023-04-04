@@ -1,5 +1,4 @@
-from content_generator import ContentGenerator
-from content_saver import ContentSaver
+from content_service import ContentService
 
 
 class SingleMode:
@@ -15,6 +14,5 @@ class SingleMode:
             subject_type = self.user_input.get_subject_type()
             number = self.user_input.get_number_of_outputs()
 
-            content_generator = ContentGenerator(
-                output_type, subject_type, number)
-            content_generator.generate_and_send()
+            content_service = ContentService(output_type)
+            content_service.generate_and_send(subject_type, number)

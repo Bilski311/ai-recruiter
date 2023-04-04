@@ -7,6 +7,18 @@ class UserInput:
         choice = input("Enter your choice: ").upper()
         return choice
 
+    def get_job_position(self):
+        return input("Enter the job position: ")
+
+    def get_number_of_topics(self):
+        return int(input("Enter the number of topics: "))
+
+    def get_number_of_subtopics(self):
+        return int(input("Enter the number of subtopics: "))
+
+    def get_number_of_flashcards(self):
+        return int(input("Enter the number of flashcards: "))
+
     def get_output_type(self):
         available_types = ['TOPIC', 'SUBTOPIC', 'FLASHCARD']
 

@@ -66,6 +66,22 @@ def get_subtopics():
     return jsonify(subtopics_list)
 
 
+@app.route('/subtopic/topic_name/<string:topic_name>', methods=['GET'])
+def get_subtopics_by_topic_name(topic_name):
+    topic = topics.find_one({'name': topic_name})
+    if not topic:
+        return jsonify({'error': f'Topic with name {topic_name} does not exist'}), 404
+
+    topic_id = topic['_id']
+    print(topic_id)
+    subtopics_list = []
+    for subtopic in subtopics.find({'topic_id': topic_id}):
+        subtopic['_id'] = str(subtopic['_id'])
+        subtopics_list.append(subtopic)
+
+    return jsonify(subtopics_list)
+
+
 @app.route('/subtopic', methods=['POST'])
 def create_subtopic():
     try:

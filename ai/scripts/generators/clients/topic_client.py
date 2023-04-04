@@ -7,6 +7,16 @@ class TopicClient(BaseClient):
     def __init__(self):
         super().__init__(endpoint="topic")
 
+    def get_all(self):
+        try:
+            response = requests.get(self.url)
+            response.raise_for_status()
+        except HTTPError as e:
+            e.response = response
+            raise e
+
+        return response.json()
+
     def get_by_name(self, name):
         url = f"{self.url}/name/{name}"
         try:
