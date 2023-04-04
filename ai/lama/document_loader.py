@@ -1,7 +1,7 @@
 import os
 from llama_index import GPTSimpleVectorIndex, SimpleDirectoryReader
 
-os.environ["OPENAI_API_KEY"] = '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'
+os.environ["OPENAI_API_KEY"] = 'key'
 
 
 def load_data(folder):
