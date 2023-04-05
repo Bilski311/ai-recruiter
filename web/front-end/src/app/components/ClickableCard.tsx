@@ -2,17 +2,26 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
-interface Props {
+export interface ClickableCardProps {
   title: string;
   description: string;
   icon: IconDefinition;
   iconClassName: string;
+  onClick: () => void;
   className?: string;
 }
 
-function Card({ title, description, icon, iconClassName, className }: Props) {
+function ClickableCard({
+  title,
+  description,
+  icon,
+  iconClassName,
+  onClick,
+  className,
+}: ClickableCardProps) {
   return (
     <div
+      onClick={onClick}
       className={`bg-white rounded-lg shadow-md text-center p-8 hover:cursor-pointer hover:shadow-lg hover:bg-gray-800 hover:text-white ${className}`}
     >
       <div className="flex justify-center items-center mb-4">
@@ -28,4 +37,4 @@ function Card({ title, description, icon, iconClassName, className }: Props) {
   );
 }
 
-export default Card;
+export default ClickableCard;

@@ -1,8 +1,8 @@
-interface Props {
+interface FooterProps {
   className?: string;
 }
 
-function Footer({ className }: Props) {
+function Footer({ className }: FooterProps) {
   return (
     <footer className={`bg-gray-800 py-12 px-6 ${className}`}>
       <div className="max-w-4xl mx-auto text-center">
