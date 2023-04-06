@@ -52,6 +52,7 @@ function Sets({ className }: SetsProps) {
         onClick={() => {
           push(`sets/${set}`);
         }}
+        key={set}
       />
     );
   };

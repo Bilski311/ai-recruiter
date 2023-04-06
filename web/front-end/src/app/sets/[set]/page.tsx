@@ -1,5 +1,6 @@
 import { Set, SetOptions } from "@/objectAssertions/setOptions";
 import { notFound } from "next/navigation";
+import FlashcardContainer from "@/app/sets/FlashcardContainer";
 
 interface props {
   params: {
@@ -9,7 +10,11 @@ interface props {
 
 function Set({ params: { set } }: props) {
   if (!Object.values(SetOptions).includes(set)) return notFound();
-  return <div>{set}</div>;
+  return (
+    <>
+      <FlashcardContainer />
+    </>
+  );
 }
 
 export default Set;
