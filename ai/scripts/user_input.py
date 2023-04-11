@@ -36,3 +36,10 @@ class UserInput:
 
     def get_number_of_outputs(self):
         return int(input("Enter the number of outputs: "))
+
+    def get_generation_mode(self):
+        print("\nSelect generation mode:")
+        print("1. Generate from scratch")
+        print("2. Continue with existing content")
+        choice = int(input("Enter your choice: "))
+        return choice

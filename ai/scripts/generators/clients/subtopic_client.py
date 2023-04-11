@@ -1,5 +1,6 @@
 import requests
 from requests.exceptions import HTTPError
+from urllib.parse import quote
 from .base_client import BaseClient
 
 
@@ -7,22 +8,21 @@ class SubtopicClient(BaseClient):
     def __init__(self):
         super().__init__(endpoint="subtopic")
 
-    def get_by_name(self, name):
-        url = f"{self.url}/name/{name}"
+    def get_by_name(self, subtopic_name):
+        url = f"{self.url}/name/{quote(subtopic_name)}"
         try:
             response = requests.get(url)
             response.raise_for_status()
-        except HTTPError as e:
-            e.response = response
+            return response.json()
+        except Exception as e:
             raise e
-
-        return response.json()
 
     def save_all(self, subtopics):
         for subtopic in subtopics:
             requests.post(self.url, json=subtopic)
 
     def save(self, subtopic):
+        subtopic['name'] = subtopic.get('name', None).replace('/', '%2F')
         requests.post(self.url, json=subtopic)
 
     def update(self, subtopic):
