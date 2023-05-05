@@ -11,10 +11,10 @@ class FlashcardGenerator(BaseGenerator):
         self.topic_client = TopicClient()
         self.subtopic_client = SubtopicClient()
 
-    def generate(self, subtopic_name, amount):
+    def generate(self, subtopic_name, amount, topic_name=None):
         subtopic = self.subtopic_client.get_by_name(subtopic_name)
         flashcards = self.content_generator.generate(
-            subtopic=subtopic['name'], amount=amount)
+            subtopic=f"{topic_name}: {subtopic['name']}", amount=amount)
 
         existing_flashcards = subtopic.get('flashcards', [])
         subtopic['flashcards'] = existing_flashcards + flashcards

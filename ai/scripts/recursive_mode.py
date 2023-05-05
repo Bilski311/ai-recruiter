@@ -40,11 +40,10 @@ class RecursiveMode:
             print(subtopics)
 
             for subtopic in subtopics:
-                subtopic_name = f'{topic["name"]}: {subtopic["name"]}'
                 print('GENERATING FLASHCARDS FOR SUBTOPIC: ' +
-                      subtopic_name)
+                      subtopic["name"])
                 flashcard_service.generate_and_send(
-                    subtopic_name, num_flashcards, ask_before_saving=False)
+                    subtopic["name"], num_flashcards, ask_before_saving=False, topic_name=topic["name"])
 
     def continue_with_existing_content(self):
         num_subtopics = self.user_input.get_number_of_subtopics()
@@ -72,8 +71,7 @@ class RecursiveMode:
 
             for subtopic in subtopics:
                 if not subtopic.get('flashcards'):
-                    subtopic_name = f'{topic["name"]}: {subtopic["name"]}'
                     print('GENERATING FLASHCARDS FOR SUBTOPIC:',
-                          subtopic_name)
+                          subtopic['name'])
                     flashcard_service.generate_and_send(
-                        subtopic_name, num_flashcards, ask_before_saving=False)
+                        subtopic['name'], num_flashcards, ask_before_saving=False, topic_name=topic['name'])
