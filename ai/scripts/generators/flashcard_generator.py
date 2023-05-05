@@ -13,7 +13,6 @@ class FlashcardGenerator(BaseGenerator):
 
     def generate(self, subtopic_name, amount):
         subtopic = self.subtopic_client.get_by_name(subtopic_name)
-        print(subtopic)
         flashcards = self.content_generator.generate(
             subtopic=subtopic['name'], amount=amount)
 

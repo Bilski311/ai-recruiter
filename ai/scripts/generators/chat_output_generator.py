@@ -6,13 +6,13 @@ from langchain.prompts import (
     HumanMessagePromptTemplate,
 )
 
-from config import CHAT_TEMPERATURE
+from config import CHAT_TEMPERATURE, MODEL_NAME
 
 
 class ChatOutputGenerator:
     def __init__(self, output_type):
         self.output_type = output_type
-        self.chat = ChatOpenAI(temperature=CHAT_TEMPERATURE)
+        self.chat = ChatOpenAI(temperature=CHAT_TEMPERATURE, model_name=MODEL_NAME)
 
     def generate(self, **kwargs):
         system_template = self.output_type.system_template
