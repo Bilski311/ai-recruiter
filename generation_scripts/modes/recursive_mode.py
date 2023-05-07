@@ -1,6 +1,4 @@
-from topic_service import TopicService
-from subtopic_service import SubtopicService
-from flashcard_service import FlashcardService
+from services import TopicService, SubtopicService, FlashcardService
 
 
 class RecursiveMode:

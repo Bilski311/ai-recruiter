@@ -1,6 +1,5 @@
-from topic_service import TopicService
-from subtopic_service import SubtopicService
-from flashcard_service import FlashcardService
+from services import TopicService, SubtopicService, FlashcardService
+
 
 class SingleMode:
     def __init__(self, user_input):
@@ -21,5 +20,5 @@ class SingleMode:
                 content_service = SubtopicService()
             elif output_type == 'FLASHCARD':
                 content_service = FlashcardService()
-            
+
             content_service.generate_and_send(subject_type, number)

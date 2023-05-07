@@ -1,6 +1,6 @@
-from .output_types import TopicOutputType
+from output_types import TopicOutputType
 from .base_generator import BaseGenerator
-from .clients import TopicClient
+from clients import TopicClient
 
 
 class TopicGenerator(BaseGenerator):

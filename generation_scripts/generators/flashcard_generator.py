@@ -1,8 +1,8 @@
 from requests.exceptions import HTTPError
 
-from .output_types import FlashcardOutputType
+from output_types import FlashcardOutputType
 from .base_generator import BaseGenerator
-from .clients import TopicClient, SubtopicClient
+from clients import TopicClient, SubtopicClient
 
 
 class FlashcardGenerator(BaseGenerator):

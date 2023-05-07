@@ -1,5 +1,6 @@
-from content_service import ContentService
-from generators import TopicGenerator, TopicClient
+from .content_service import ContentService
+from generators import TopicGenerator
+from clients import TopicClient
 
 
 class TopicService(ContentService):

@@ -1,6 +1,5 @@
 from user_input import UserInput
-from recursive_mode import RecursiveMode
-from single_mode import SingleMode
+from modes import RecursiveMode, SingleMode
 from dotenv import load_dotenv
 
 

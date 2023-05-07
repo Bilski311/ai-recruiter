@@ -1,5 +1,6 @@
-from content_service import ContentService
-from generators import SubtopicGenerator, SubtopicClient
+from .content_service import ContentService
+from generators import SubtopicGenerator
+from clients import SubtopicClient
 
 
 class SubtopicService(ContentService):
