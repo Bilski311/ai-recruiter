@@ -7,7 +7,7 @@ from llama_index.node_parser import SimpleNodeParser
 from llama_index.query_engine import RetrieverQueryEngine
 from llama_index.retrievers import VectorIndexRetriever
 
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 
 
@@ -16,7 +16,7 @@ class QueryEngine:
     def __init__(self):
         self.chat = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
 
-        documents = SimpleDirectoryReader('data').load_data()
+        documents = SimpleDirectoryReader('data', recursive=True).load_data()
         parser = SimpleNodeParser()
         nodes = parser.get_nodes_from_documents(documents)
 
@@ -25,11 +25,11 @@ class QueryEngine:
             llm_predictor=llm_predictor)
 
         index = GPTVectorStoreIndex(nodes, service_context=service_context)
-        retriever = VectorIndexRetriever(index=index, similarity_top_k=2)
+        retriever = VectorIndexRetriever(index=index, similarity_top_k=10)
 
         response_synthesizer = ResponseSynthesizer.from_args(
             node_postprocessors=[
-                SimilarityPostprocessor(similarity_cutoff=0.75)
+                SimilarityPostprocessor(similarity_cutoff=0.71)
             ]
         )
 
