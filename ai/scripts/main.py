@@ -1,6 +1,7 @@
 from user_input import UserInput
 from recursive_mode import RecursiveMode
 from single_mode import SingleMode
+from dotenv import load_dotenv
 
 
 class ContentGeneratorApp:
@@ -12,7 +13,6 @@ class ContentGeneratorApp:
             app_mode = self.user_input.get_app_mode()
             if app_mode == 'Q':
                 break
-
             if app_mode == '1':
                 recursive_mode = RecursiveMode(self.user_input)
                 recursive_mode.run()
@@ -22,5 +22,6 @@ class ContentGeneratorApp:
 
 
 if __name__ == "__main__":
+    load_dotenv()
     content_generator_app = ContentGeneratorApp()
     content_generator_app.main_loop()
