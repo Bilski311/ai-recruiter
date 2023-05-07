@@ -1,0 +1,114 @@
+Static initialization blocks
+Static initialization blocks are declared within a class. It contains statements to be evaluated during class initialization. This permits more flexible initialization logic than static properties, such as using try...catch or setting multiple fields from a single value. Initialization is performed in the context of the current class declaration, with access to private state, which allows the class to share information of its private properties with other classes or functions declared in the same scope (analogous to "friend" classes in C++).
+
+Try it
+
+Syntax
+class ClassWithSIB {
+  static {
+    // …
+  }
+}
+Copy to Clipboard
+Description
+Without static initialization blocks, complex static initialization might be achieved by calling a static method after the class declaration:
+
+class MyClass {
+  static init() {
+    // Access to private static fields is allowed here
+  }
+}
+
+MyClass.init();
+Copy to Clipboard
+However, this approach exposes an implementation detail (the init() method) to the user of the class. On the other hand, any initialization logic declared outside the class does not have access to private static fields. Static initialization blocks allow arbitrary initialization logic to be declared within the class and executed during class evaluation.
+
+A class can have any number of static {} initialization blocks in its class body. These are evaluated, along with any interleaved static field initializers, in the order they are declared. Any static initialization of a super class is performed first, before that of its sub classes.
+
+The scope of the variables declared inside the static block is local to the block. This includes var, function, const, and let declarations. var declarations in the block are not hoisted.
+
+var y = "Outer y";
+
+class A {
+  static field = "Inner y";
+  static {
+    var y = this.field;
+  }
+}
+
+// var defined in static block is not hoisted
+console.log(y); // 'Outer y'
+Copy to Clipboard
+The this inside a static block refers to the constructor object of the class. super.property can be used to access static properties of the super class. Note however that it is a syntax error to call super() in a class static initialization block, or to use the arguments object.
+
+The statements are evaluated synchronously. You cannot use await or yield in this block. (Think of the initialization statements as being implicitly wrapped in a function.)
+
+The scope of the static block is nested within the lexical scope of the class body, and can access private names declared within the class without causing a syntax error.
+
+Static field initializers and static initialization blocks are evaluated one-by-one. The initialization block can refer to field values above it, but not below it. All static methods are added beforehand and can be accessed, although calling them may not behave as expected if they refer to fields below the current block.
+
+Note: This is more important with private static fields, because accessing a non-initialized private field throws a TypeError, even if the private field is declared below. (If the private field is not declared, it would be an early SyntaxError.)
+
+A static initialization block may not have decorators (the class itself may).
+
+Examples
+Multiple blocks
+The code below demonstrates a class with static initialization blocks and interleaved static field initializers. The output shows that the blocks and fields are evaluated in execution order.
+
+class MyClass {
+  static field1 = console.log("static field1");
+  static {
+    console.log("static block1");
+  }
+  static field2 = console.log("static field2");
+  static {
+    console.log("static block2");
+  }
+}
+// 'static field1'
+// 'static block1'
+// 'static field2'
+// 'static block2'
+Copy to Clipboard
+Note that any static initialization of a super class is performed first, before that of its sub classes.
+
+Using this and super
+The this inside a static block refers to the constructor object of the class. This code shows how to access a public static field.
+
+class A {
+  static field = "static field";
+  static {
+    console.log(this.field);
+  }
+}
+// 'static field'
+Copy to Clipboard
+The super.property syntax can be used inside a static block to reference static properties of a super class.
+
+class A {
+  static field = "static field";
+}
+
+class B extends A {
+  static {
+    console.log(super.field);
+  }
+}
+// 'static field'
+Copy to Clipboard
+Access to private properties
+This example below shows how access can be granted to a private instance field of a class from an object outside the class (example from the v8.dev blog):
+
+let getDPrivateField;
+
+class D {
+  #privateField;
+  constructor(v) {
+    this.#privateField = v;
+  }
+  static {
+    getDPrivateField = (d) => d.#privateField;
+  }
+}
+
+console.log(getDPrivateField(new D("private"))); // 'private'
