@@ -7,12 +7,13 @@ from langchain.prompts import (
 )
 
 from config import CHAT_TEMPERATURE, MODEL_NAME
+from query_engines import QueryEngine
 
 
 class ChatOutputGenerator:
     def __init__(self, output_type):
         self.output_type = output_type
-        self.chat = ChatOpenAI(temperature=CHAT_TEMPERATURE, model_name=MODEL_NAME)
+        self.query_engine = QueryEngine()
 
     def generate(self, **kwargs):
         system_template = self.output_type.system_template
@@ -30,5 +31,6 @@ class ChatOutputGenerator:
         chat_prompt = ChatPromptTemplate.from_messages(
             [system_message_prompt, human_message_prompt])
         formatted_prompt = chat_prompt.format_prompt(**kwargs).to_messages()
+        answer = self.query_engine.query(formatted_prompt)
 
-        return self.chat(formatted_prompt).content
+        return answer
